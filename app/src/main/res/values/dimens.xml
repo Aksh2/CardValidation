@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_width">50dp</dimen>
+    <dimen name="image_height">50dp</dimen>
+    <dimen name="card_height">200dp</dimen>
+    <dimen name="card_margin">16dp</dimen>
+    <dimen name="image_margin">16dp</dimen>
+    <dimen name="card_number_height">50dp</dimen>
+    <dimen name="card_number_padding">8dp</dimen>
+</resources>

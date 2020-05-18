@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ValidCard</string>
+    <string name="error_invalid_card_number">Invalid Card Number !</string>
 </resources>
