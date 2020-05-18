@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import coil.api.load
 import com.learning.cardvalidation.Utils.CardFormatter
 import com.learning.cardvalidation.Utils.validateCardNumber
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity() {
             hint = "X"
             isCursorVisible = false
             maxLines=1
+            setHintTextColor(ContextCompat.getColor(this@MainActivity, android.R.color.white))
+            setTextColor(ContextCompat.getColor(this@MainActivity, android.R.color.white))
             this.filters = arrayOf(InputFilter.LengthFilter(1))
             inputType = InputType.TYPE_CLASS_NUMBER
         }
