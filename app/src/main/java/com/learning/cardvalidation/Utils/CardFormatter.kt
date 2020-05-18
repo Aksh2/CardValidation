@@ -1,26 +1,33 @@
 package com.learning.cardvalidation.Utils
 
 import android.util.ArrayMap
-import android.util.SparseArray
 import com.learning.cardvalidation.R
 import com.learning.cardvalidation.model.CardType
-import java.util.regex.Pattern
 
+/**
+ * A kotlin class to specify the formatting and graphic to be used for a given card or in otherwords
+ * is a configuration class.
+ * To make it scalable this data should ideally come from a server.
+ */
 class CardFormatter {
 
     companion object{
-        private val mCardTypePattern = ArrayMap<CardType,Pattern>()
-
+        private val mCardType = ArrayMap<String, CardType>()
+        const val DINERS = "diners"
+        const val MASTERCARD = "master"
+        const val AMEX = "amex"
+        const val GENERIC = "generic"
         fun matchPatternWithCardType(input: CharSequence): CardType?{
-            /*mCardTypePattern.put(CardType(R.drawable.visa,4), Pattern.compile(
-                Regex.escape("(?:4[0-9]{12}(?:[0-9]{3})?")))
-            mCardTypePattern.put(CardType(R.drawable.mastercard,4), Pattern.compile(
-                Regex.escape("(?:5[1-5][0-9]{2}")))
-            mCardTypePattern.put(CardType(R.drawable.amex, 4), Pattern.compile(
-                Regex.escape("3[47][0-9]{13}")))*/
 
-            if(input.startsWith("4")) {
-                return CardType(R.drawable.visa,4)
+            if(mCardType.isNullOrEmpty()){
+                mCardType.put(DINERS, CardType(R.drawable.diners, arrayOf(3, 9), 14))
+                mCardType.put(MASTERCARD, CardType(R.drawable.mastercard, arrayOf(3, 7, 11),16))
+                mCardType.put(AMEX, CardType(R.drawable.amex, arrayOf(3, 9),15))
+                mCardType.put(GENERIC, CardType(R.drawable.creditcard, arrayOf(3, 7, 11),16))
+            }
+
+            if(input.startsWith("36")) {
+                return mCardType.get(DINERS)
             } else if(input.startsWith("51")
                 ||input.startsWith("52")
                 || input.startsWith("53")
@@ -29,23 +36,13 @@ class CardFormatter {
                 || input.startsWith("222100")
                 || input.startsWith("272099")) {
 
-                return CardType(R.drawable.mastercard,4)
+                return  mCardType.get(MASTERCARD)
             } else if(input.startsWith("34") || input.startsWith("37")) {
-                return CardType(R.drawable.amex,4)
+                return mCardType.get(AMEX)
             } else{
-                return CardType(R.drawable.creditcard,4)
+                return mCardType.get(GENERIC)
             }
 
-
-            /*for(index in 0 until mCardTypePattern.size){
-                val key = mCardTypePattern.keyAt(index)
-                val pattern = mCardTypePattern.get(key)
-                val matcher = pattern?.matcher(input)!!
-                if(matcher.find()){
-                    return key
-                }
-            }
-            return null*/
         }
     }
 
